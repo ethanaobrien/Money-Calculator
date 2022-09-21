@@ -21,7 +21,7 @@
             })
             elements[3].checked = values.tax;
         } catch(e) {
-        	localStorage.removeItem('money-numbers');
+            localStorage.removeItem('money-numbers');
         }
         processNumbers();
     }
@@ -42,7 +42,7 @@
         const isNegative = moneyNeeded<0;
         moneyNeeded = Math.abs(moneyNeeded);
         let amnt = moneyNeeded/(parseFloat(elements[1].value)*parseFloat(elements[2].value));
-        
+
         let days = amnt*7;
         let weeks = 0;
         let months = 0;
@@ -70,7 +70,7 @@
                 days=0;
             }
         }
-        
+
         if (isNaN(moneyNeeded)) moneyNeeded=null;
         if (years===null||isNaN(years)) years=null;
         else years=years.toFixed();
@@ -82,18 +82,18 @@
         else days=Math.ceil(days).toFixed();
         if (typeof moneyNeeded === 'number') moneyNeeded=moneyNeeded.toFixed(2);
         const forceAll = moneyNeeded===null;
-        
+
         if ((moneyNeeded&&moneyNeeded.includes('e'))||(days&&days.includes('e'))||(weeks&&weeks.includes('e'))||(months&&months.includes('e'))||(years&&years.includes('e'))) {
             result.innerText = 'That\'s a big number (too big)';
             return;
         }
-        
+
         if (years&&years>110) {
             result.innerText = 'You\'d be dead by then (most likely). It\'d take you '+years+' years!';
             return;
         }
-        
-        
+
+
         let resultText = 'If you '+(isNegative?'have':'need')+' $'+moneyNeeded+', ';
         let parts = [];
         if (years >= 1 || forceAll) {
@@ -129,7 +129,7 @@
     window.addEventListener('DOMContentLoaded', () => {
         result = document.getElementById('result');
         elements = [].slice.call(document.getElementById("main").getElementsByTagName("input"), 0);
-		elements.forEach(elem => {
+        elements.forEach(elem => {
             elem.addEventListener('change', processNumbers);
             elem.addEventListener('keydown', processNumbers);
             elem.addEventListener('keyup', processNumbers);
